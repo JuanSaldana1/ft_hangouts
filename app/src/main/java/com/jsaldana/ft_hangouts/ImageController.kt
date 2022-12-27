@@ -19,5 +19,16 @@ object ImageController {
 		file.writeBytes(bytes)
 	}
 
-	fun obtainPictureUri(context: Context, id: Long){}
+	fun obtainPictureUri(context: Context, id: Long): Uri {
+		val file = File(context.filesDir, id.toString())
+		return if (file.exists())
+			Uri.fromFile(file)
+		else
+			Uri.parse(R.drawable.ic_round_account_circle_24.toString())
+	}
+
+	fun deletePicture(context: Context, id: Long) {
+		val file = File(context.filesDir, id.toString())
+		file.delete()
+	}
 }
