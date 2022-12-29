@@ -9,4 +9,7 @@
 	<string name="add">add</string>
 	<string name="profileimage">profileImage</string>
 	<string name="surname">Surname</string>
+	<string name="save_contact">Save Contact</string>
+	<string name="birth_date">Birth Date</string>
+	<string name="email">Email</string>
 </resources>
