@@ -7,4 +7,6 @@
 
 	<string name="name">Name</string>
 	<string name="add">add</string>
+	<string name="profileimage">profileImage</string>
+	<string name="surname">Surname</string>
 </resources>
