@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.jsaldana.ft_hangouts.databinding.FragmentListContactsBinding
 
 /**
@@ -21,11 +22,12 @@ class ListContactsFragment : Fragment() {
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
 		savedInstanceState: Bundle?
-	): View? {
-
+	): View {
 		_binding = FragmentListContactsBinding.inflate(inflater, container, false)
+		binding.createContactButton.setOnClickListener {
+			findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+		}
 		return binding.root
-
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
