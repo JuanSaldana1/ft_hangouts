@@ -11,7 +11,7 @@ import com.jsaldana.ft_hangouts.databinding.FragmentSecondBinding
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class SecondFragment : Fragment() {
+class CreateContactFragment : Fragment() {
 
 	private var _binding: FragmentSecondBinding? = null
 

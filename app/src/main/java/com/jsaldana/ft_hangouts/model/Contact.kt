@@ -9,7 +9,7 @@ import java.io.Serializable
 data class Contact(
 	@ColumnInfo(name = "id")
 	@PrimaryKey(autoGenerate = true)
-	private var id: Int,
+	val id: Int,
 	val name: String,
 	val surname: String,
 	val birthDate: String,
