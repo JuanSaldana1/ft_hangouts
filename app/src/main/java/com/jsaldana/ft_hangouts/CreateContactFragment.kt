@@ -8,7 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.jsaldana.ft_hangouts.databinding.FragmentCreateContactBinding
+import com.jsaldana.ft_hangouts.model.Contact
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -30,8 +35,10 @@ class CreateContactFragment : Fragment() {
 
 		_binding = FragmentCreateContactBinding.inflate(inflater, container, false)
 		selectProfileImage()
+		binding.saveNewContactButton.setOnClickListener {
+			saveNewContact()
+		}
 		return binding.root
-
 	}
 
 	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -52,6 +59,26 @@ class CreateContactFragment : Fragment() {
 		binding.contactPictureImageView.setOnClickListener {
 			ImageController.selectPicture(this, SELECTCODE)
 		}
+	}
+
+	private fun saveNewContact() {
+		val database = AppDatabase.getDatabase(requireContext())
+
+		val name = binding.contactNameEditText.text.toString()
+		val surname = binding.contactSurnameEditText.text.toString()
+		val birthDate = binding.contactBirthDateEditText.text.toString()
+		val email = binding.contactEmailEditText.text.toString()
+
+		val contact =
+			Contact(0, name, surname, R.drawable.ic_round_image_24.toString(), birthDate, email)
+
+		CoroutineScope(Dispatchers.IO).launch {
+			val id = database.contact().insertContact(contact)[0]
+			pictureUri?.let {
+				ImageController.savePicture(requireContext(), id, it)
+			}
+		}
+		findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
 	}
 
 	override fun onDestroyView() {
